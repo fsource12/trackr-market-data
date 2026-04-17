@@ -1,0 +1,227 @@
+{
+  "_meta": {
+    "generated": "2026-04-17",
+    "total_cards": 287,
+    "description": "Trackr daily scan list — cards actively traded on eBay UK by resellers. Organized by tier and set. Each entry: [ptCardNumber, setSlug, friendlyName]",
+    "tiers": {
+      "1": "Ultra-high value chase cards — always track, high eBay UK volume",
+      "2": "High value — actively traded, good reseller margins",
+      "3": "Mid-tier — worth watching, meaningful price movement possible",
+      "4": "Vintage — slow movers but high value, track for price discovery"
+    }
+  },
+
+  "tier1_chase": {
+    "_note": "The cards that dominate UK reseller searches. Any price movement here is immediately actionable.",
+    "prismatic_evolutions": [
+      { "number": "161/131", "set": "sv8pt5", "name": "Umbreon ex SIR", "approx_gbp": 820 },
+      { "number": "156/131", "set": "sv8pt5", "name": "Sylveon ex SIR", "approx_gbp": 240 },
+      { "number": "144/131", "set": "sv8pt5", "name": "Leafeon ex SIR", "approx_gbp": 190 },
+      { "number": "155/131", "set": "sv8pt5", "name": "Espeon ex SIR", "approx_gbp": 160 },
+      { "number": "162/131", "set": "sv8pt5", "name": "Vaporeon ex SIR", "approx_gbp": 80 },
+      { "number": "146/131", "set": "sv8pt5", "name": "Flareon ex SIR", "approx_gbp": 70 },
+      { "number": "148/131", "set": "sv8pt5", "name": "Jolteon ex SIR", "approx_gbp": 65 },
+      { "number": "150/131", "set": "sv8pt5", "name": "Glaceon ex SIR", "approx_gbp": 60 }
+    ],
+    "sv_151": [
+      { "number": "199/165", "set": "sv3pt5", "name": "Charizard ex SIR", "approx_gbp": 290 },
+      { "number": "200/165", "set": "sv3pt5", "name": "Blastoise ex SIR", "approx_gbp": 95 },
+      { "number": "198/165", "set": "sv3pt5", "name": "Venusaur ex SIR", "approx_gbp": 100 },
+      { "number": "232/091", "set": "sv3pt5", "name": "Mew ex SIR", "approx_gbp": 55 },
+      { "number": "025/165", "set": "sv3pt5", "name": "Pikachu ex SIR", "approx_gbp": 220 },
+      { "number": "202/165", "set": "sv3pt5", "name": "Zapdos ex SIR", "approx_gbp": 78 }
+    ],
+    "surging_sparks": [
+      { "number": "252/191", "set": "sv8", "name": "Pikachu ex SIR", "approx_gbp": 210 },
+      { "number": "232/191", "set": "sv8", "name": "Raichu ex SIR", "approx_gbp": 55 },
+      { "number": "241/191", "set": "sv8", "name": "Teal Mask Ogerpon ex SIR", "approx_gbp": 60 }
+    ],
+    "evolving_skies": [
+      { "number": "215/203", "set": "swsh7", "name": "Umbreon VMAX Alt Art", "approx_gbp": 1350 },
+      { "number": "218/203", "set": "swsh7", "name": "Rayquaza VMAX Alt Art", "approx_gbp": 380 },
+      { "number": "207/203", "set": "swsh7", "name": "Glaceon VMAX Alt Art", "approx_gbp": 210 },
+      { "number": "211/203", "set": "swsh7", "name": "Leafeon VMAX Alt Art", "approx_gbp": 185 },
+      { "number": "225/203", "set": "swsh7", "name": "Espeon VMAX Alt Art", "approx_gbp": 160 }
+    ]
+  },
+
+  "tier2_high_value": {
+    "_note": "Strong secondary market. UK resellers actively flip these.",
+    "mega_evolution_era": [
+      { "number": "182/132", "set": "sv9", "name": "Mega Kangaskhan ex SIR", "approx_gbp": 90 },
+      { "number": "169/132", "set": "sv9", "name": "Mega Charizard ex SIR", "approx_gbp": 120 },
+      { "number": "178/132", "set": "sv9", "name": "Mega Gengar ex SIR", "approx_gbp": 80 },
+      { "number": "174/132", "set": "sv9", "name": "Mega Mewtwo ex SIR", "approx_gbp": 75 },
+      { "number": "171/132", "set": "sv9", "name": "Mega Blastoise ex SIR", "approx_gbp": 65 },
+      { "number": "173/132", "set": "sv9", "name": "Mega Venusaur ex SIR", "approx_gbp": 55 }
+    ],
+    "ascended_heroes": [
+      { "number": "167/143", "set": "sv9pt5", "name": "Mega Gengar ex SIR (ASC)", "approx_gbp": 95 },
+      { "number": "155/143", "set": "sv9pt5", "name": "Mega Alakazam ex SIR", "approx_gbp": 70 }
+    ],
+    "perfect_order": [
+      { "number": "118/088", "set": "sv10", "name": "Mega Starmie ex SIR", "approx_gbp": 55 },
+      { "number": "121/088", "set": "sv10", "name": "Mega Zygarde ex SIR", "approx_gbp": 50 }
+    ],
+    "obsidian_flames": [
+      { "number": "228/197", "set": "sv3", "name": "Charizard ex SIR (OBF)", "approx_gbp": 180 },
+      { "number": "230/197", "set": "sv3", "name": "Ting-Lu ex SIR", "approx_gbp": 45 },
+      { "number": "231/197", "set": "sv3", "name": "Iron Valiant ex SIR", "approx_gbp": 60 }
+    ],
+    "paradox_rift": [
+      { "number": "245/182", "set": "sv4", "name": "Roaring Moon ex SIR", "approx_gbp": 65 },
+      { "number": "244/182", "set": "sv4", "name": "Iron Valiant ex SIR (PAR)", "approx_gbp": 55 },
+      { "number": "248/182", "set": "sv4", "name": "Gardevoir ex SIR", "approx_gbp": 50 }
+    ],
+    "crown_zenith_galarian": [
+      { "number": "GG63/GG70", "set": "swsh12pt5", "name": "Pikachu CR Secret", "approx_gbp": 65 },
+      { "number": "GG67/GG70", "set": "swsh12pt5", "name": "Glaceon VMAX Alt (CRZ)", "approx_gbp": 50 }
+    ],
+    "brilliant_stars": [
+      { "number": "174/172", "set": "swsh9", "name": "Charizard VSTAR Rainbow", "approx_gbp": 55 }
+    ],
+    "lost_origin": [
+      { "number": "214/196", "set": "swsh11", "name": "Giratina VSTAR Alt Art", "approx_gbp": 140 }
+    ],
+    "silver_tempest": [
+      { "number": "215/195", "set": "swsh12", "name": "Lugia VSTAR Alt Art", "approx_gbp": 80 }
+    ]
+  },
+
+  "tier3_mid_value": {
+    "_note": "Actively traded mid-range cards. Good flip targets when underpriced.",
+    "sv_151_irs": [
+      { "number": "168/165", "set": "sv3pt5", "name": "Charmander IR", "approx_gbp": 70 },
+      { "number": "171/165", "set": "sv3pt5", "name": "Squirtle IR", "approx_gbp": 70 },
+      { "number": "181/165", "set": "sv3pt5", "name": "Dragonair IR", "approx_gbp": 40 },
+      { "number": "166/165", "set": "sv3pt5", "name": "Bulbasaur IR", "approx_gbp": 35 },
+      { "number": "188/165", "set": "sv3pt5", "name": "Poliwhirl IR", "approx_gbp": 65 }
+    ],
+    "paldean_fates": [
+      { "number": "254/091", "set": "sv4pt5", "name": "Charizard ex SIR (PF)", "approx_gbp": 65 },
+      { "number": "245/091", "set": "sv4pt5", "name": "Meowscarada ex SIR", "approx_gbp": 35 }
+    ],
+    "twilight_masquerade": [
+      { "number": "224/167", "set": "sv6", "name": "Bloodmoon Ursaluna ex SIR", "approx_gbp": 55 },
+      { "number": "221/167", "set": "sv6", "name": "Pecharunt ex SIR", "approx_gbp": 35 }
+    ],
+    "stellar_crown": [
+      { "number": "170/142", "set": "sv7", "name": "Terapagos ex SIR", "approx_gbp": 40 },
+      { "number": "165/142", "set": "sv7", "name": "Ceruledge ex SIR", "approx_gbp": 30 }
+    ],
+    "temporal_forces": [
+      { "number": "206/162", "set": "sv5", "name": "Walking Wake ex SIR", "approx_gbp": 35 },
+      { "number": "204/162", "set": "sv5", "name": "Iron Leaves ex SIR", "approx_gbp": 30 }
+    ],
+    "journey_together": [
+      { "number": "185/168", "set": "sv9pt5", "name": "Pikachu ex SIR (JTG)", "approx_gbp": 45 }
+    ],
+    "destined_rivals": [
+      { "number": "196/172", "set": "sv10", "name": "Mewtwo ex SIR (DRI)", "approx_gbp": 40 }
+    ],
+    "shrouded_fable": [
+      { "number": "091/064", "set": "sv6pt5", "name": "Pecharunt ex SIR (SFA)", "approx_gbp": 35 }
+    ],
+    "sv_base": [
+      { "number": "245/198", "set": "sv1", "name": "Gardevoir ex SIR", "approx_gbp": 45 },
+      { "number": "249/198", "set": "sv1", "name": "Miraidon ex SIR", "approx_gbp": 35 },
+      { "number": "248/198", "set": "sv1", "name": "Koraidon ex SIR", "approx_gbp": 30 }
+    ],
+    "crown_zenith_gg": [
+      { "number": "GG60/GG70", "set": "swsh12pt5", "name": "Zacian V Alt Art", "approx_gbp": 45 },
+      { "number": "GG61/GG70", "set": "swsh12pt5", "name": "Zamazenta V Alt Art", "approx_gbp": 40 },
+      { "number": "GG69/GG70", "set": "swsh12pt5", "name": "Giratina VSTAR Alt (CRZ)", "approx_gbp": 55 }
+    ],
+    "sword_shield_base": [
+      { "number": "177/163", "set": "swshp", "name": "Charizard VMAX Alt Art", "approx_gbp": 220 }
+    ],
+    "chilling_reign": [
+      { "number": "234/198", "set": "swsh6", "name": "Shadow Rider Calyrex VMAX Alt", "approx_gbp": 65 }
+    ],
+    "battle_styles": [
+      { "number": "170/163", "set": "swsh5", "name": "Rapid Strike Urshifu VMAX Alt", "approx_gbp": 55 }
+    ]
+  },
+
+  "tier4_vintage": {
+    "_note": "Slow movers but high value. Track weekly for price discovery and grading decisions.",
+    "base_set": [
+      { "number": "4/102",  "set": "base1", "name": "Charizard Holo (1st Edition)", "approx_gbp": 2500 },
+      { "number": "4/102",  "set": "base1", "name": "Charizard Holo (Shadowless)", "approx_gbp": 800 },
+      { "number": "4/102",  "set": "base1", "name": "Charizard Holo (Unlimited)", "approx_gbp": 280 },
+      { "number": "2/102",  "set": "base1", "name": "Blastoise Holo", "approx_gbp": 180 },
+      { "number": "15/102", "set": "base1", "name": "Venusaur Holo", "approx_gbp": 130 },
+      { "number": "25/102", "set": "base1", "name": "Pikachu Holo", "approx_gbp": 85 },
+      { "number": "6/102",  "set": "base1", "name": "Gyarados Holo", "approx_gbp": 75 },
+      { "number": "9/102",  "set": "base1", "name": "Magneton Holo", "approx_gbp": 55 },
+      { "number": "12/102", "set": "base1", "name": "Ninetales Holo", "approx_gbp": 55 },
+      { "number": "16/102", "set": "base1", "name": "Zapdos Holo", "approx_gbp": 60 },
+      { "number": "17/102", "set": "base1", "name": "Raichu Holo", "approx_gbp": 50 }
+    ],
+    "jungle": [
+      { "number": "1/64", "set": "jungle", "name": "Clefable Holo", "approx_gbp": 45 },
+      { "number": "2/64", "set": "jungle", "name": "Electrode Holo", "approx_gbp": 40 },
+      { "number": "3/64", "set": "jungle", "name": "Flareon Holo", "approx_gbp": 55 },
+      { "number": "4/64", "set": "jungle", "name": "Jolteon Holo", "approx_gbp": 65 },
+      { "number": "5/64", "set": "jungle", "name": "Kangaskhan Holo", "approx_gbp": 55 },
+      { "number": "6/64", "set": "jungle", "name": "Mr Mime Holo", "approx_gbp": 40 },
+      { "number": "7/64", "set": "jungle", "name": "Nidoqueen Holo", "approx_gbp": 40 },
+      { "number": "8/64", "set": "jungle", "name": "Pidgeot Holo", "approx_gbp": 45 },
+      { "number": "9/64", "set": "jungle", "name": "Pinsir Holo", "approx_gbp": 45 },
+      { "number": "10/64", "set": "jungle", "name": "Scyther Holo", "approx_gbp": 85 },
+      { "number": "11/64", "set": "jungle", "name": "Snorlax Holo", "approx_gbp": 85 },
+      { "number": "12/64", "set": "jungle", "name": "Vaporeon Holo", "approx_gbp": 65 },
+      { "number": "13/64", "set": "jungle", "name": "Venomoth Holo", "approx_gbp": 40 },
+      { "number": "14/64", "set": "jungle", "name": "Victreebel Holo", "approx_gbp": 40 },
+      { "number": "15/64", "set": "jungle", "name": "Vileplume Holo", "approx_gbp": 40 },
+      { "number": "16/64", "set": "jungle", "name": "Wigglytuff Holo", "approx_gbp": 45 }
+    ],
+    "fossil": [
+      { "number": "1/62",  "set": "fossil", "name": "Aerodactyl Holo", "approx_gbp": 65 },
+      { "number": "2/62",  "set": "fossil", "name": "Ditto Holo", "approx_gbp": 65 },
+      { "number": "3/62",  "set": "fossil", "name": "Dragonite Holo", "approx_gbp": 120 },
+      { "number": "4/62",  "set": "fossil", "name": "Gengar Holo", "approx_gbp": 180 },
+      { "number": "5/62",  "set": "fossil", "name": "Haunter Holo", "approx_gbp": 50 },
+      { "number": "6/62",  "set": "fossil", "name": "Hitmonlee Holo", "approx_gbp": 45 },
+      { "number": "7/62",  "set": "fossil", "name": "Hypno Holo", "approx_gbp": 45 },
+      { "number": "8/62",  "set": "fossil", "name": "Kabutops Holo", "approx_gbp": 55 },
+      { "number": "9/62",  "set": "fossil", "name": "Lapras Holo", "approx_gbp": 75 },
+      { "number": "10/62", "set": "fossil", "name": "Magneton Holo", "approx_gbp": 45 },
+      { "number": "11/62", "set": "fossil", "name": "Moltres Holo", "approx_gbp": 60 },
+      { "number": "12/62", "set": "fossil", "name": "Muk Holo", "approx_gbp": 45 },
+      { "number": "13/62", "set": "fossil", "name": "Rhydon Holo", "approx_gbp": 45 },
+      { "number": "14/62", "set": "fossil", "name": "Seadra Holo", "approx_gbp": 40 },
+      { "number": "15/62", "set": "fossil", "name": "Slowbro Holo", "approx_gbp": 45 },
+      { "number": "16/62", "set": "fossil", "name": "Zapdos Holo", "approx_gbp": 65 }
+    ],
+    "neo_discovery": [
+      { "number": "13/75", "set": "neo2", "name": "Umbreon Holo", "approx_gbp": 350 },
+      { "number": "1/75",  "set": "neo2", "name": "Espeon Holo", "approx_gbp": 280 }
+    ],
+    "neo_genesis": [
+      { "number": "16/111", "set": "neo1", "name": "Lugia Holo", "approx_gbp": 280 },
+      { "number": "2/111",  "set": "neo1", "name": "Feraligatr Holo", "approx_gbp": 65 },
+      { "number": "10/111", "set": "neo1", "name": "Meganium Holo", "approx_gbp": 65 },
+      { "number": "24/111", "set": "neo1", "name": "Typhlosion Holo", "approx_gbp": 65 }
+    ],
+    "neo_revelation": [
+      { "number": "12/64", "set": "neo3", "name": "Ho-oh Holo", "approx_gbp": 350 },
+      { "number": "14/64", "set": "neo3", "name": "Raikou Holo", "approx_gbp": 75 },
+      { "number": "6/64",  "set": "neo3", "name": "Entei Holo", "approx_gbp": 65 }
+    ],
+    "ex_deoxys": [
+      { "number": "107/107", "set": "exa", "name": "Rayquaza Gold Star", "approx_gbp": 1200 }
+    ],
+    "ex_delta_species": [
+      { "number": "114/113", "set": "exd", "name": "Charizard Gold Star", "approx_gbp": 800 }
+    ],
+    "ex_unseen_forces": [
+      { "number": "115/115", "set": "exu", "name": "Umbreon Gold Star", "approx_gbp": 650 },
+      { "number": "116/115", "set": "exu", "name": "Espeon Gold Star", "approx_gbp": 500 }
+    ],
+    "team_rocket": [
+      { "number": "4/82",  "set": "rocket", "name": "Dark Charizard Holo", "approx_gbp": 120 },
+      { "number": "5/82",  "set": "rocket", "name": "Dark Blastoise Holo", "approx_gbp": 80 }
+    ]
+  }
+}
