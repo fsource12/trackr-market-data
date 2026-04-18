@@ -59,63 +59,53 @@ async function fetchGBPRate() {
 }
 
 // ── Extract prices from PokeTrace card object ─────────────────
-// PokeTrace returns prices nested by market and condition.
-// We try multiple paths to find the best available price.
+// EU structure: prices.cardmarket.{avg, avg1d, avg7d, avg30d}
+//               prices.cardmarket_unsold.NEAR_MINT.{avg, low, saleCount}
+// US structure: prices.ebay.NEAR_MINT.{avg, avg7d, avg30d, saleCount}
+//               prices.ebay.PSA_10.{avg, avg7d}
+//               prices.tcgplayer.NEAR_MINT.{avg, avg7d, avg30d}
 function extractPricesFromCard(card, gbpRate, isUS) {
   if (!card) return {};
-
   const prices = card.prices || {};
-
-  // ── CardMarket (EU, EUR) ──────────────────────────────────────
-  const cm = prices.cardmarket || {};
-  // Try condition keys in priority order
-  const cmCondKeys = ["NEAR_MINT","LIGHTLY_PLAYED","EXCELLENT","AGGREGATED","GOOD"];
-  let cmData = null;
-  for (const k of cmCondKeys) {
-    if (cm[k] && (cm[k].avg || cm[k].avg30d || cm[k].low)) { cmData = cm[k]; break; }
-  }
-  // Also try top-level cm fields (some API versions return avg30d directly on cardmarket)
-  if (!cmData && cm.avg30d) cmData = cm;
-
-  const eurToGbp = v => v ? +(v * 0.855).toFixed(2) : null; // EUR→GBP direct rate
-
-  const cmAvg    = eurToGbp(cmData?.avg    || cmData?.marketPrice || null);
-  const cmAvg7d  = eurToGbp(cmData?.avg7d  || null);
-  const cmAvg30d = eurToGbp(cmData?.avg30d || null);
-  const cmLow    = eurToGbp(cmData?.low    || cmData?.lowPrice   || null);
-  const cmSales  = cmData?.saleCount || cmData?.salesCount || cmData?.recentSales || 0;
-
-  // ── eBay (USD) ───────────────────────────────────────────────
-  const eb  = prices.ebay || {};
-  const ebCondKeys = ["NEAR_MINT","LIGHTLY_PLAYED","EXCELLENT","GOOD"];
-  let ebData = null;
-  for (const k of ebCondKeys) {
-    if (eb[k] && eb[k].avg) { ebData = eb[k]; break; }
-  }
+  const eurToGbp = v => v ? +(v * 0.855).toFixed(2) : null;
   const usdToGbp = v => v ? +(v * gbpRate).toFixed(2) : null;
-  const ebAvg    = usdToGbp(ebData?.avg || null);
-  const ebSales  = ebData?.saleCount || 0;
 
-  // ── PSA 10 (USD) ──────────────────────────────────────────────
-  const psa10Data = eb["PSA_10"] || eb["PSA10"] || {};
-  const psa10     = usdToGbp(psa10Data?.avg || null);
+  if (!isUS) {
+    // ── EU (CardMarket) ─────────────────────────────────────────
+    const cm   = prices.cardmarket || {};            // flat: avg, avg7d, avg30d
+    const cmu  = prices.cardmarket_unsold || {};      // nested: NEAR_MINT, PSA_10 etc
+    const nmData = cmu["NEAR_MINT"] || cmu["EXCELLENT"] || cmu["LIGHTLY_PLAYED"] || {};
+    const psa10  = cmu["PSA_10"] || {};
 
-  // ── TCGPlayer (USD) ───────────────────────────────────────────
-  const tcg     = prices.tcgplayer || {};
-  const tcgNM   = tcg["NEAR_MINT"] || {};
-  const tcgAvg  = usdToGbp(tcgNM?.avg || tcgNM?.marketPrice || null);
+    return {
+      marketPrice:    eurToGbp(cm.avg   || nmData.avg || null),
+      avg7d:          eurToGbp(cm.avg7d  || null),
+      avg30d:         eurToGbp(cm.avg30d || null),
+      lowestListing:  eurToGbp(nmData.low || null),
+      salesCount7d:   nmData.saleCount || 0,
+      psa10Price:     eurToGbp(psa10.avg || null),
+      rawPrice:       eurToGbp(cm.avg || nmData.avg || null),
+    };
+  } else {
+    // ── US (eBay + TCGPlayer) ───────────────────────────────────
+    const eb  = prices.ebay || {};
+    const tcg = prices.tcgplayer || {};
+    const condKeys = ["NEAR_MINT","LIGHTLY_PLAYED","EXCELLENT","GOOD"];
+    let ebNM = null;
+    for (const k of condKeys) { if (eb[k]?.avg) { ebNM = eb[k]; break; } }
+    const tcgNM  = tcg["NEAR_MINT"] || {};
+    const psa10  = eb["PSA_10"] || {};
 
-  // ── Best market price ─────────────────────────────────────────
-  // Prefer CM (EU) price since UK is closer to EU market,
-  // fall back to eBay US, then TCGPlayer
-  const marketPrice  = cmAvg  || ebAvg   || tcgAvg  || null;
-  const avg7d        = cmAvg7d;
-  const avg30d       = cmAvg30d;
-  const lowestListing= cmLow  || null;
-  const salesCount7d = cmSales || ebSales || 0;
-  const rawPrice     = ebAvg  || cmAvg   || null;
-
-  return { marketPrice, avg7d, avg30d, lowestListing, salesCount7d, psa10Price:psa10, rawPrice };
+    return {
+      marketPrice:    usdToGbp(ebNM?.avg || tcgNM.avg || null),
+      avg7d:          usdToGbp(ebNM?.avg7d  || tcgNM.avg7d  || null),
+      avg30d:         usdToGbp(ebNM?.avg30d || tcgNM.avg30d || null),
+      lowestListing:  usdToGbp(ebNM?.low || null),
+      salesCount7d:   ebNM?.saleCount || 0,
+      psa10Price:     usdToGbp(psa10.avg || null),
+      rawPrice:       usdToGbp(ebNM?.avg || null),
+    };
+  }
 }
 
 // ── Match a card from API results ─────────────────────────────
