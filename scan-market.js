@@ -281,14 +281,14 @@ async function main() {
 
   const sorted     = [...results].sort((a,b) => b.score - a.score);
   const mom_up     = results.filter(r=>r.triggers.includes("momentum_up"))
-                            .sort((a,b)=>b.momentum_pct-a.momentum_pct).slice(0,10);
+                            .sort((a,b)=>b.momentum_pct-a.momentum_pct).slice(0,50);
   const mom_dn     = results.filter(r=>r.triggers.includes("momentum_down"))
-                            .sort((a,b)=>a.momentum_pct-b.momentum_pct).slice(0,10);
+                            .sort((a,b)=>a.momentum_pct-b.momentum_pct).slice(0,50);
   const grade_tgts = results.filter(r=>r.triggers.includes("grade_target"))
-                            .sort((a,b)=>b.psa_ratio-a.psa_ratio).slice(0,8);
+                            .sort((a,b)=>b.psa_ratio-a.psa_ratio).slice(0,30);
   const flip_ops   = results.filter(r=>r.triggers.includes("flip_opportunity"))
                             .sort((a,b)=>((b.market_price||0)-(b.lowest_listing||0))-
-                                         ((a.market_price||0)-(a.lowest_listing||0))).slice(0,8);
+                                         ((a.market_price||0)-(a.lowest_listing||0))).slice(0,30);
 
   const output = {
     generated:          new Date().toISOString(),
@@ -300,7 +300,7 @@ async function main() {
     momentum_down:      mom_dn,
     grade_targets:      grade_tgts,
     flip_opportunities: flip_ops,
-    top_overall:        sorted.slice(0,15),
+    top_overall:        sorted.slice(0,50),
     all_tracked:        sorted,
   };
 
@@ -314,7 +314,7 @@ async function main() {
   } else {
     console.log("ℹ No momentum signals today (7d == 30d avg for most cards)");
     console.log("  All tracked cards:");
-    sorted.slice(0,8).forEach(c =>
+    sorted.slice(0,30).forEach(c =>
       console.log(`  ${c.name.padEnd(28)} £${c.market_price||c.approx_gbp||"—"}`));
   }
 }
