@@ -1,16 +1,15 @@
-
 name: Trackr Daily Market Scan
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 06:00 UTC daily
-  workflow_dispatch:        # allow manual trigger from GitHub UI
+    - cron: '0 6 * * *' # 06:00 UTC daily
+  workflow_dispatch: # allow manual trigger from GitHub UI
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # needed to commit daily-movers.json
+      contents: write # needed to commit daily-movers.json
 
     steps:
       - name: Checkout repo
@@ -28,9 +27,9 @@ jobs:
 
       - name: Commit daily-movers.json
         run: |
-          git config user.name  "Trackr Scanner"
+          git config user.name "Trackr Scanner"
           git config user.email "trackrchromeapp@gmail.com"
           git add daily-movers.json
-         git diff --staged --quiet || git commit -m "Daily scan: $(date -u +%Y-%m-%d)"
+          git diff --staged --quiet || git commit -m "Daily scan: $(date -u +%Y-%m-%d)"
           git pull --rebase origin main
           git push
