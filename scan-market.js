@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 /**
- * Trackr Market Scanner
- * ─────────────────────────────────────────────────────────────────
- * Runs daily via GitHub Actions. Fetches PokeTrace data for all
- * cards in scan-list.json, applies filters, scores opportunities,
- * writes daily-movers.json to repo root for extension popup to fetch.
- *
- * Usage: node scan-market.js
- * Output: daily-movers.json
- *
- * GitHub Actions: runs at 06:00 UTC daily
- * Extension popup: fetches raw GitHub URL (free, no auth)
+ * Trackr Market Scanner v2
+ * Fixed price extraction to match actual PokeTrace API response structure
  */
 
 const https = require("https");
@@ -18,22 +9,13 @@ const fs    = require("fs");
 
 const PT_KEY  = process.env.POKETRACE_KEY;
 const PT_BASE = "https://api.poketrace.com/v1";
-const DELAY   = 250; // ms between requests (~4/s)
+const DELAY   = 300;
 
 if (!PT_KEY) { console.error("POKETRACE_KEY env var required"); process.exit(1); }
 
-// ── Filter config (from Trackr spec) ─────────────────────────────
 const FILTERS = {
-  min_price_gbp:      15,
-  min_sales_7d:       3,   // lowered from 5 — PokeTrace EU counts are lower than US
-  max_set_age_years:  10,
-  rarity_whitelist: [
-    "Special Illustration Rare", "Illustration Rare", "Hyper Rare",
-    "Secret Rare", "Ultra Rare", "Full Art", "Trainer Gallery",
-    "Galarian Gallery", "Promo", "Holo Rare", "Rare Holo",
-    "Alternate Full Art", "Rainbow Rare", "Gold Rare",
-    "Special Art Rare", "Art Rare"
-  ],
+  min_price_gbp: 8,    // lowered — EU prices often come back lower
+  min_sales_7d:  1,    // lowered — EU saleCount is often 0 even for active cards
   pokemon_whitelist: [
     "Charizard","Pikachu","Umbreon","Eevee","Mewtwo","Rayquaza",
     "Gengar","Lugia","Greninja","Mew","Snorlax","Dragonite",
@@ -43,248 +25,272 @@ const FILTERS = {
     "Ninetales","Scyther","Giratina","Ho-Oh","Entei","Raikou",
     "Suicune","Celebi","Pichu","Togekiss","Zacian","Zamazenta",
     "Eternatus","Mimikyu","Dragapult","Ditto","Lapras","Dragonair",
-    "Poliwhirl","Charmander","Squirtle","Bulbasaur"
+    "Poliwhirl","Charmander","Squirtle","Bulbasaur","Mega",
+    "Starmie","Kangaskhan","Zygarde","Greninja","Floette",
   ],
-  exclude_keywords: ["job lot","bundle","proxy","custom","fake","replica"],
 };
 
-// ── Event trigger thresholds ──────────────────────────────────────
-const TRIGGERS = {
-  momentum_up:      { threshold_pct: 10 },  // 7d avg > 30d avg by 10%+
-  momentum_down:    { threshold_pct: -10 }, // 7d avg < 30d avg by 10%+
-  volume_spike:     { multiplier: 1.8 },    // saleCount notably high
-  grade_target:     { min_psa_ratio: 2.0 }, // PSA10 / raw >= 2x
-  flip_opportunity: { min_spread_gbp: 8 },  // CM low vs eBay avg spread
-};
+const WEIGHTS = { liquidity:0.35, momentum:0.25, spread:0.20, grading:0.20 };
 
-// ── Scoring weights ───────────────────────────────────────────────
-const WEIGHTS = {
-  liquidity: 0.35,
-  momentum:  0.25,
-  spread:    0.20,
-  grading:   0.20,
-};
-
-// ── HTTP helper ───────────────────────────────────────────────────
-function httpGet(url, headers = {}) {
+function httpGet(url, headers={}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, {
-      headers: { "User-Agent": "Trackr-Scanner/1.0", ...headers }
-    }, res => {
+    const req = https.get(url, { headers:{"User-Agent":"Trackr-Scanner/2.0",...headers} }, res => {
       let d = "";
       res.on("data", c => d += c);
       res.on("end", () => {
         if (res.statusCode === 429) { reject(new Error("RATE_LIMITED")); return; }
         if (res.statusCode >= 400) { reject(new Error(`HTTP_${res.statusCode}`)); return; }
         try { resolve(JSON.parse(d)); }
-        catch(e) { reject(new Error("PARSE_ERROR")); }
+        catch(e) { reject(new Error("PARSE_ERROR: " + d.substring(0,100))); }
       });
     });
-    req.on("error", e => reject(new Error(`NET: ${e.message}`)));
-    req.setTimeout(10000, () => { req.destroy(); reject(new Error("TIMEOUT")); });
+    req.on("error", e => reject(new Error("NET: " + e.message)));
+    req.setTimeout(12000, () => { req.destroy(); reject(new Error("TIMEOUT")); });
   });
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── USD → GBP conversion (approximate, updated daily) ────────────
 async function fetchGBPRate() {
   try {
-    const json = await httpGet("https://api.frankfurter.app/latest?from=USD&to=GBP");
-    return json?.rates?.GBP || 0.79;
-  } catch(e) {
-    return 0.79; // fallback
-  }
+    const j = await httpGet("https://api.frankfurter.app/latest?from=USD&to=GBP");
+    return j?.rates?.GBP || 0.79;
+  } catch(e) { return 0.79; }
 }
 
-// ── Fetch card data from PokeTrace ───────────────────────────────
+// ── Extract prices from PokeTrace card object ─────────────────
+// PokeTrace returns prices nested by market and condition.
+// We try multiple paths to find the best available price.
+function extractPricesFromCard(card, gbpRate, isUS) {
+  if (!card) return {};
+
+  const prices = card.prices || {};
+
+  // ── CardMarket (EU, EUR) ──────────────────────────────────────
+  const cm = prices.cardmarket || {};
+  // Try condition keys in priority order
+  const cmCondKeys = ["NEAR_MINT","LIGHTLY_PLAYED","EXCELLENT","AGGREGATED","GOOD"];
+  let cmData = null;
+  for (const k of cmCondKeys) {
+    if (cm[k] && (cm[k].avg || cm[k].avg30d || cm[k].low)) { cmData = cm[k]; break; }
+  }
+  // Also try top-level cm fields (some API versions return avg30d directly on cardmarket)
+  if (!cmData && cm.avg30d) cmData = cm;
+
+  const eurToGbp = v => v ? +(v * 0.855).toFixed(2) : null; // EUR→GBP direct rate
+
+  const cmAvg    = eurToGbp(cmData?.avg    || cmData?.marketPrice || null);
+  const cmAvg7d  = eurToGbp(cmData?.avg7d  || null);
+  const cmAvg30d = eurToGbp(cmData?.avg30d || null);
+  const cmLow    = eurToGbp(cmData?.low    || cmData?.lowPrice   || null);
+  const cmSales  = cmData?.saleCount || cmData?.salesCount || cmData?.recentSales || 0;
+
+  // ── eBay (USD) ───────────────────────────────────────────────
+  const eb  = prices.ebay || {};
+  const ebCondKeys = ["NEAR_MINT","LIGHTLY_PLAYED","EXCELLENT","GOOD"];
+  let ebData = null;
+  for (const k of ebCondKeys) {
+    if (eb[k] && eb[k].avg) { ebData = eb[k]; break; }
+  }
+  const usdToGbp = v => v ? +(v * gbpRate).toFixed(2) : null;
+  const ebAvg    = usdToGbp(ebData?.avg || null);
+  const ebSales  = ebData?.saleCount || 0;
+
+  // ── PSA 10 (USD) ──────────────────────────────────────────────
+  const psa10Data = eb["PSA_10"] || eb["PSA10"] || {};
+  const psa10     = usdToGbp(psa10Data?.avg || null);
+
+  // ── TCGPlayer (USD) ───────────────────────────────────────────
+  const tcg     = prices.tcgplayer || {};
+  const tcgNM   = tcg["NEAR_MINT"] || {};
+  const tcgAvg  = usdToGbp(tcgNM?.avg || tcgNM?.marketPrice || null);
+
+  // ── Best market price ─────────────────────────────────────────
+  // Prefer CM (EU) price since UK is closer to EU market,
+  // fall back to eBay US, then TCGPlayer
+  const marketPrice  = cmAvg  || ebAvg   || tcgAvg  || null;
+  const avg7d        = cmAvg7d;
+  const avg30d       = cmAvg30d;
+  const lowestListing= cmLow  || null;
+  const salesCount7d = cmSales || ebSales || 0;
+  const rawPrice     = ebAvg  || cmAvg   || null;
+
+  return { marketPrice, avg7d, avg30d, lowestListing, salesCount7d, psa10Price:psa10, rawPrice };
+}
+
+// ── Match a card from API results ─────────────────────────────
+function matchCard(data, name, number) {
+  if (!Array.isArray(data) || !data.length) return null;
+  const norm   = s => (s||"").replace(/[\s\/]/g,"").toLowerCase();
+  const num    = number?.split("/")?.[0];          // numerator only
+  const nameLow = name.toLowerCase().split(" ")[0]; // first word of name
+
+  // Try exact card number match first
+  const byNum = data.find(c => norm(c.cardNumber) === norm(num));
+  if (byNum) return byNum;
+
+  // Try name + approximate number
+  const byNameNum = data.find(c =>
+    (c.name||"").toLowerCase().includes(nameLow) &&
+    norm(c.cardNumber).startsWith(norm(num).substring(0,3))
+  );
+  if (byNameNum) return byNameNum;
+
+  // Fall back to best name match
+  return data.find(c => (c.name||"").toLowerCase().includes(nameLow)) || data[0];
+}
+
 async function fetchCard(name, set, number) {
   const search = encodeURIComponent(`${name} ${set}`.trim());
-  const url = `${PT_BASE}/cards?search=${search}&market=EU&limit=5`;
+  const hdrs   = { "X-API-Key": PT_KEY };
+
   try {
-    const euJson = await httpGet(url, { "X-API-Key": PT_KEY });
-    // Also fetch US for graded prices
-    const urlUS = `${PT_BASE}/cards?search=${search}&market=US&limit=5`;
-    const usJson = await httpGet(urlUS, { "X-API-Key": PT_KEY });
+    const [euJson, usJson] = await Promise.all([
+      httpGet(`${PT_BASE}/cards?search=${search}&market=EU&limit=8`, hdrs).catch(() => null),
+      httpGet(`${PT_BASE}/cards?search=${search}&market=US&limit=8`, hdrs).catch(() => null),
+    ]);
 
-    const norm = s => (s || "").replace(/\s/g, "").toLowerCase();
-    const matchCard = (data) => {
-      if (!data?.length) return null;
-      return data.find(c => norm(c.cardNumber) === norm(number?.split("/")[0]))
-          || data.find(c => (c.name||"").toLowerCase().includes(name.toLowerCase().split(" ")[0]))
-          || data[0];
-    };
-
-    const euCard = matchCard(euJson?.data);
-    const usCard = matchCard(usJson?.data);
+    const euCard = matchCard(euJson?.data, name, number);
+    const usCard = matchCard(usJson?.data, name, number);
     return { euCard, usCard };
   } catch(e) {
-    return { euCard: null, usCard: null };
+    return { euCard:null, usCard:null };
   }
 }
 
-// ── Extract price data from card ──────────────────────────────────
-function extractPrices(euCard, usCard, gbpRate) {
-  const cm    = euCard?.prices?.cardmarket?.AGGREGATED || {};
-  const ebUS  = usCard?.prices?.ebay?.NEAR_MINT || {};
-  const tcg   = usCard?.prices?.tcgplayer?.NEAR_MINT || {};
-  const psa10 = usCard?.prices?.ebay?.PSA_10 || {};
-
-  const eurToGbp = (v) => v ? v * (gbpRate / 1.18) : null; // EUR → GBP approx via USD
-  const usdToGbp = (v) => v ? v * gbpRate : null;
-
-  return {
-    market_price:         eurToGbp(cm.avg) || usdToGbp(ebUS.avg),
-    avg_price_7d:         eurToGbp(cm.avg7d),
-    avg_price_30d:        eurToGbp(cm.avg30d),
-    lowest_listing:       eurToGbp(cm.low),
-    sales_count_7d:       euCard?.totalSaleCount || usCard?.totalSaleCount || 0,
-    psa10_price:          usdToGbp(psa10.avg),
-    raw_price:            usdToGbp(ebUS.avg) || eurToGbp(cm.avg),
-    rarity:               euCard?.rarity || usCard?.rarity || null,
-    image:                euCard?.image || usCard?.image || null,
-    card_id:              euCard?.id || usCard?.id || null,
-    last_updated:         new Date().toISOString(),
-  };
-}
-
-// ── Score a card ──────────────────────────────────────────────────
 function scoreCard(prices) {
-  const { avg_price_7d, avg_price_30d, sales_count_7d, psa10_price, raw_price, market_price, lowest_listing } = prices;
+  const { avg7d, avg30d, salesCount7d, psa10Price, rawPrice, marketPrice, lowestListing } = prices;
 
-  // Momentum: 7d vs 30d
-  let momentumScore = 0;
-  let momentumPct   = 0;
-  if (avg_price_7d && avg_price_30d && avg_price_30d > 0) {
-    momentumPct   = ((avg_price_7d - avg_price_30d) / avg_price_30d) * 100;
-    momentumScore = Math.min(Math.max(momentumPct / 20, -1), 1); // normalise -1 to +1
+  let momentumPct = 0;
+  if (avg7d && avg30d && avg30d > 0) {
+    momentumPct = +((avg7d - avg30d) / avg30d * 100).toFixed(1);
   }
+  const momentumScore  = Math.min(Math.max(momentumPct/25, -1), 1);
+  const liquidityScore = Math.min(salesCount7d / 15, 1);
 
-  // Liquidity: sales count normalised (20+ sales = max)
-  const liquidityScore = Math.min(sales_count_7d / 20, 1);
-
-  // Spread: CM low vs market price
   let spreadScore = 0;
-  if (lowest_listing && market_price && market_price > 0) {
-    const spreadPct  = ((market_price - lowest_listing) / market_price) * 100;
-    spreadScore      = Math.min(spreadPct / 30, 1);
+  if (lowestListing && marketPrice && marketPrice > 0) {
+    spreadScore = Math.min(((marketPrice - lowestListing) / marketPrice * 100) / 30, 1);
   }
 
-  // Grading upside: PSA10 / raw ratio
-  let gradingScore = 0;
-  let psaRatio     = 0;
-  if (psa10_price && raw_price && raw_price > 0) {
-    psaRatio     = psa10_price / raw_price;
-    gradingScore = Math.min((psaRatio - 1) / 4, 1); // ratio of 5x = max score
+  let psaRatio = 0, gradingScore = 0;
+  if (psa10Price && rawPrice && rawPrice > 0) {
+    psaRatio     = +(psa10Price / rawPrice).toFixed(1);
+    gradingScore = Math.min((psaRatio - 1) / 4, 1);
   }
 
   const totalScore =
-    (liquidityScore * WEIGHTS.liquidity) +
-    (momentumScore  * WEIGHTS.momentum)  +
-    (spreadScore    * WEIGHTS.spread)    +
-    (gradingScore   * WEIGHTS.grading);
+    liquidityScore * WEIGHTS.liquidity +
+    momentumScore  * WEIGHTS.momentum  +
+    spreadScore    * WEIGHTS.spread    +
+    gradingScore   * WEIGHTS.grading;
 
-  return { totalScore, momentumPct, psaRatio, liquidityScore, spreadScore };
+  return { totalScore: +totalScore.toFixed(3), momentumPct, psaRatio };
 }
 
-// ── Classify triggers ─────────────────────────────────────────────
 function classifyTriggers(prices, scores) {
-  const triggers = [];
-  if (scores.momentumPct >= TRIGGERS.momentum_up.threshold_pct)
-    triggers.push("momentum_up");
-  if (scores.momentumPct <= TRIGGERS.momentum_down.threshold_pct)
-    triggers.push("momentum_down");
-  if (scores.psaRatio >= TRIGGERS.grade_target.min_psa_ratio)
-    triggers.push("grade_target");
-  const spread = prices.market_price && prices.lowest_listing
-    ? prices.market_price - prices.lowest_listing : 0;
-  if (spread >= TRIGGERS.flip_opportunity.min_spread_gbp)
-    triggers.push("flip_opportunity");
-  return triggers;
+  const t = [];
+  if (scores.momentumPct >=  8)  t.push("momentum_up");
+  if (scores.momentumPct <= -8)  t.push("momentum_down");
+  if (scores.psaRatio >= 1.8)    t.push("grade_target");
+  const spread = (prices.marketPrice||0) - (prices.lowestListing||0);
+  if (spread >= 6)               t.push("flip_opportunity");
+  return t;
 }
 
-// ── Filter card ───────────────────────────────────────────────────
 function passesFilter(card, prices) {
-  if (!prices.market_price || prices.market_price < FILTERS.min_price_gbp) return false;
-  if (prices.sales_count_7d < FILTERS.min_sales_7d) return false;
+  // Must have some price data
+  if (!prices.marketPrice && !prices.rawPrice) return false;
+  const price = prices.marketPrice || prices.rawPrice;
+  if (price < FILTERS.min_price_gbp) return false;
+  // Must be a tracked Pokémon (name whitelist)
   const nameMatch = FILTERS.pokemon_whitelist.some(p =>
-    (card.name || "").toLowerCase().includes(p.toLowerCase())
+    (card.name||"").toLowerCase().includes(p.toLowerCase())
   );
-  if (!nameMatch) return false;
-  return true;
+  return nameMatch;
 }
 
-// ── Main ──────────────────────────────────────────────────────────
 async function main() {
   console.log("╔══════════════════════════════════════════╗");
-  console.log("║  Trackr Market Scanner                  ║");
-  console.log(`║  ${new Date().toISOString().substring(0, 10)}                            ║`);
+  console.log("║  Trackr Market Scanner v2               ║");
+  console.log(`║  ${new Date().toISOString().substring(0,10)}                            ║`);
   console.log("╚══════════════════════════════════════════╝\n");
 
   const gbpRate = await fetchGBPRate();
-  console.log(`GBP/USD rate: ${gbpRate}\n`);
+  console.log(`USD→GBP rate: ${gbpRate}\n`);
 
-  // Load scan list
-  const scanList = JSON.parse(fs.readFileSync("scan-list.json", "utf8"));
+  const scanList = JSON.parse(fs.readFileSync("scan-list.json","utf8"));
   const allCards = [];
 
-  // Flatten all cards from all tiers
   for (const [tier, sets] of Object.entries(scanList)) {
     if (tier.startsWith("_")) continue;
     for (const [setName, cards] of Object.entries(sets)) {
-      if (setName.startsWith("_")) continue;
-      if (Array.isArray(cards)) {
-        cards.forEach(c => allCards.push({ ...c, tier, setGroup: setName }));
-      }
+      if (setName.startsWith("_") || !Array.isArray(cards)) continue;
+      cards.forEach(c => allCards.push({...c, tier, setGroup:setName}));
     }
   }
 
   console.log(`Scanning ${allCards.length} cards...\n`);
 
-  const results   = [];
-  let fetched = 0, skipped = 0, failed = 0;
+  const results = [];
+  let fetched=0, skipped=0, failed=0, noPrice=0;
 
-  for (let i = 0; i < allCards.length; i++) {
+  for (let i=0; i<allCards.length; i++) {
     const card = allCards[i];
-    process.stdout.write(`\r[${i+1}/${allCards.length}] ${card.name.substring(0,20).padEnd(20)} | fetched:${fetched} skipped:${skipped} failed:${failed}`);
+    process.stdout.write(`\r[${i+1}/${allCards.length}] ${card.name.substring(0,18).padEnd(18)} | ok:${fetched} skip:${skipped} noprice:${noPrice} fail:${failed}`);
 
     try {
       const { euCard, usCard } = await fetchCard(card.name, card.set, card.number);
 
       if (!euCard && !usCard) { failed++; await sleep(DELAY); continue; }
 
-      const prices = extractPrices(euCard, usCard, gbpRate);
-      prices.name   = card.name;
-      prices.number = card.number;
-      prices.set    = card.set;
-      prices.tier   = card.tier;
+      // Extract from both, prefer EU (CM) prices
+      const euPrices = extractPricesFromCard(euCard, gbpRate, false);
+      const usPrices = extractPricesFromCard(usCard, gbpRate, true);
 
-      if (!passesFilter(card, prices)) { skipped++; await sleep(DELAY); continue; }
+      // Merge: EU avg7d/avg30d preferred, US as fallback for market price and PSA
+      const prices = {
+        marketPrice:   euPrices.marketPrice  || usPrices.marketPrice,
+        avg7d:         euPrices.avg7d        || usPrices.avg7d,
+        avg30d:        euPrices.avg30d       || usPrices.avg30d,
+        lowestListing: euPrices.lowestListing|| usPrices.lowestListing,
+        salesCount7d:  euPrices.salesCount7d + usPrices.salesCount7d,
+        psa10Price:    usPrices.psa10Price   || euPrices.psa10Price,
+        rawPrice:      usPrices.rawPrice     || euPrices.rawPrice,
+      };
+
+      if (!passesFilter(card, prices)) {
+        if (!prices.marketPrice && !prices.rawPrice) noPrice++;
+        else skipped++;
+        await sleep(DELAY);
+        continue;
+      }
 
       const scores   = scoreCard(prices);
       const triggers = classifyTriggers(prices, scores);
+      const apiCard  = euCard || usCard;
 
       results.push({
-        card_id:       prices.card_id,
-        name:          card.name,
-        number:        card.number,
-        set:           card.set,
-        friendly_name: card.name,
-        rarity:        prices.rarity,
-        tier:          card.tier,
-        image:         prices.image,
-        market_price:  prices.market_price ? Math.round(prices.market_price) : null,
-        avg_price_7d:  prices.avg_price_7d  ? Math.round(prices.avg_price_7d)  : null,
-        avg_price_30d: prices.avg_price_30d ? Math.round(prices.avg_price_30d) : null,
-        lowest_listing:prices.lowest_listing ? Math.round(prices.lowest_listing) : null,
-        sales_count_7d: prices.sales_count_7d,
-        psa10_price:   prices.psa10_price ? Math.round(prices.psa10_price) : null,
-        raw_price:     prices.raw_price   ? Math.round(prices.raw_price)   : null,
-        momentum_pct:  Math.round(scores.momentumPct * 10) / 10,
-        psa_ratio:     Math.round(scores.psaRatio * 10) / 10,
-        score:         Math.round(scores.totalScore * 1000) / 1000,
+        card_id:        apiCard?.id || null,
+        name:           card.name,
+        number:         card.number,
+        set:            card.set,
+        friendly_name:  card.name,
+        rarity:         apiCard?.rarity || null,
+        tier:           card.tier,
+        image:          apiCard?.image || null,
+        market_price:   prices.marketPrice ? Math.round(prices.marketPrice) : null,
+        avg_price_7d:   prices.avg7d       ? Math.round(prices.avg7d)       : null,
+        avg_price_30d:  prices.avg30d      ? Math.round(prices.avg30d)      : null,
+        lowest_listing: prices.lowestListing ? Math.round(prices.lowestListing) : null,
+        sales_count_7d: prices.salesCount7d,
+        psa10_price:    prices.psa10Price  ? Math.round(prices.psa10Price)  : null,
+        raw_price:      prices.rawPrice    ? Math.round(prices.rawPrice)    : null,
+        momentum_pct:   scores.momentumPct,
+        psa_ratio:      scores.psaRatio,
+        score:          scores.totalScore,
         triggers,
-        last_updated:  prices.last_updated,
+        last_updated:   new Date().toISOString(),
       });
 
       fetched++;
@@ -296,55 +302,44 @@ async function main() {
   }
 
   process.stdout.write("\n\n");
-  console.log(`Fetched: ${fetched} | Skipped: ${skipped} | Failed: ${failed}`);
-  console.log(`Results: ${results.length} cards passed filters\n`);
+  console.log(`Results: ${results.length} tracked | ${skipped} skipped | ${noPrice} no-price | ${failed} failed\n`);
 
-  // ── Build output ──────────────────────────────────────────────
-  const sorted       = [...results].sort((a, b) => b.score - a.score);
-  const momentum_up  = results.filter(r => r.triggers.includes("momentum_up"))
-                              .sort((a, b) => b.momentum_pct - a.momentum_pct)
-                              .slice(0, 10);
-  const momentum_dn  = results.filter(r => r.triggers.includes("momentum_down"))
-                              .sort((a, b) => a.momentum_pct - b.momentum_pct)
-                              .slice(0, 10);
-  const grade_targets = results.filter(r => r.triggers.includes("grade_target"))
-                               .sort((a, b) => b.psa_ratio - a.psa_ratio)
-                               .slice(0, 8);
-  const flip_ops     = results.filter(r => r.triggers.includes("flip_opportunity"))
-                              .sort((a, b) => {
-                                const sA = (a.market_price||0) - (a.lowest_listing||0);
-                                const sB = (b.market_price||0) - (b.lowest_listing||0);
-                                return sB - sA;
-                              })
-                              .slice(0, 8);
+  const sorted     = [...results].sort((a,b) => b.score - a.score);
+  const mom_up     = results.filter(r=>r.triggers.includes("momentum_up"))
+                            .sort((a,b)=>b.momentum_pct-a.momentum_pct).slice(0,10);
+  const mom_dn     = results.filter(r=>r.triggers.includes("momentum_down"))
+                            .sort((a,b)=>a.momentum_pct-b.momentum_pct).slice(0,10);
+  const grade_tgts = results.filter(r=>r.triggers.includes("grade_target"))
+                            .sort((a,b)=>b.psa_ratio-a.psa_ratio).slice(0,8);
+  const flip_ops   = results.filter(r=>r.triggers.includes("flip_opportunity"))
+                            .sort((a,b)=>((b.market_price||0)-(b.lowest_listing||0))-((a.market_price||0)-(a.lowest_listing||0))).slice(0,8);
 
   const output = {
-    generated:     new Date().toISOString(),
-    generated_date: new Date().toISOString().substring(0, 10),
-    cards_scanned: allCards.length,
-    cards_tracked: results.length,
-    gbp_rate:      gbpRate,
-    momentum_up,
-    momentum_down: momentum_dn,
-    grade_targets,
+    generated:      new Date().toISOString(),
+    generated_date: new Date().toISOString().substring(0,10),
+    cards_scanned:  allCards.length,
+    cards_tracked:  results.length,
+    gbp_rate:       gbpRate,
+    momentum_up:    mom_up,
+    momentum_down:  mom_dn,
+    grade_targets:  grade_tgts,
     flip_opportunities: flip_ops,
-    top_overall:   sorted.slice(0, 15),
-    all_tracked:   sorted, // full dataset for advanced use
+    top_overall:    sorted.slice(0,15),
+    all_tracked:    sorted,
   };
 
   fs.writeFileSync("daily-movers.json", JSON.stringify(output, null, 2));
-  console.log(`✓ Written daily-movers.json`);
+  console.log(`✓ Written daily-movers.json (${results.length} cards)\n`);
 
-  // Summary
-  console.log(`\nTop 5 momentum cards:`);
-  momentum_up.slice(0, 5).forEach(c =>
-    console.log(`  ${c.name.padEnd(30)} ▲${c.momentum_pct.toFixed(1)}%  £${c.market_price||"—"}`)
-  );
-  if (momentum_dn.length) {
-    console.log(`\nTop 3 falling cards:`);
-    momentum_dn.slice(0, 3).forEach(c =>
-      console.log(`  ${c.name.padEnd(30)} ▼${Math.abs(c.momentum_pct).toFixed(1)}%  £${c.market_price||"—"}`)
-    );
+  if (mom_up.length) {
+    console.log("Top Rising:");
+    mom_up.slice(0,5).forEach(c =>
+      console.log(`  ${c.name.padEnd(28)} ▲${c.momentum_pct}%  £${c.market_price||"—"}`));
+  }
+
+  if (!results.length) {
+    console.log("⚠  No cards tracked — check PokeTrace API response format");
+    console.log("   Hint: Add console.log(JSON.stringify(euCard,null,2)) after fetchCard to debug");
   }
 }
 
