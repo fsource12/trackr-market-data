@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-18T09:30:04.987Z",
+  "generated": "2026-04-18T09:59:23.900Z",
   "generated_date": "2026-04-18",
   "cards_scanned": 126,
   "cards_tracked": 124,
@@ -29,7 +29,7 @@
       "triggers": [
         "momentum_up"
       ],
-      "last_updated": "2026-04-18T09:29:26.744Z"
+      "last_updated": "2026-04-18T09:58:45.729Z"
     },
     {
       "card_id": "eu_564180",
@@ -57,7 +57,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:49.271Z"
+      "last_updated": "2026-04-18T09:58:08.247Z"
     },
     {
       "card_id": "eu_608720",
@@ -85,7 +85,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:02.775Z"
+      "last_updated": "2026-04-18T09:58:21.873Z"
     },
     {
       "card_id": "eu_274893_holo",
@@ -112,7 +112,7 @@
         "momentum_up",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:57.163Z"
+      "last_updated": "2026-04-18T09:59:16.063Z"
     },
     {
       "card_id": "eu_275407_holo",
@@ -138,7 +138,7 @@
       "triggers": [
         "momentum_up"
       ],
-      "last_updated": "2026-04-18T09:29:58.698Z"
+      "last_updated": "2026-04-18T09:59:17.555Z"
     },
     {
       "card_id": "eu_273753",
@@ -166,7 +166,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:01.453Z"
+      "last_updated": "2026-04-18T09:58:20.533Z"
     },
     {
       "card_id": "eu_785521",
@@ -193,7 +193,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:12.126Z"
+      "last_updated": "2026-04-18T09:58:31.186Z"
     },
     {
       "card_id": "eu_805538",
@@ -221,7 +221,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:35.193Z"
+      "last_updated": "2026-04-18T09:57:54.125Z"
     },
     {
       "card_id": "eu_289809",
@@ -249,7 +249,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:42.831Z"
+      "last_updated": "2026-04-18T09:58:01.821Z"
     },
     {
       "card_id": "eu_289809",
@@ -277,7 +277,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:44.375Z"
+      "last_updated": "2026-04-18T09:58:03.343Z"
     }
   ],
   "momentum_down": [
@@ -306,7 +306,7 @@
         "momentum_down",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:41.360Z"
+      "last_updated": "2026-04-18T09:59:00.149Z"
     },
     {
       "card_id": "eu_275291_holo",
@@ -333,7 +333,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:39.228Z"
+      "last_updated": "2026-04-18T09:58:58.076Z"
     },
     {
       "card_id": "eu_277450_holo",
@@ -361,7 +361,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:32.715Z"
+      "last_updated": "2026-04-18T09:58:51.614Z"
     },
     {
       "card_id": "eu_279688_holo",
@@ -388,7 +388,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:33.444Z"
+      "last_updated": "2026-04-18T09:58:52.347Z"
     },
     {
       "card_id": "eu_752789",
@@ -415,7 +415,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:12.849Z"
+      "last_updated": "2026-04-18T09:58:31.917Z"
     },
     {
       "card_id": "eu_761512",
@@ -442,7 +442,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:10.105Z"
+      "last_updated": "2026-04-18T09:58:29.154Z"
     },
     {
       "card_id": "eu_840152",
@@ -469,7 +469,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:53.694Z"
+      "last_updated": "2026-04-18T09:58:12.630Z"
     },
     {
       "card_id": "eu_273758",
@@ -497,7 +497,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:05.710Z"
+      "last_updated": "2026-04-18T09:58:24.702Z"
     },
     {
       "card_id": "eu_273739",
@@ -525,7 +525,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:07.208Z"
+      "last_updated": "2026-04-18T09:58:26.239Z"
     }
   ],
   "grade_targets": [
@@ -553,7 +553,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:40.652Z"
+      "last_updated": "2026-04-18T09:58:59.450Z"
     },
     {
       "card_id": "eu_273739",
@@ -581,7 +581,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:07.208Z"
+      "last_updated": "2026-04-18T09:58:26.239Z"
     },
     {
       "card_id": "eu_273753",
@@ -609,7 +609,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:01.453Z"
+      "last_updated": "2026-04-18T09:58:20.533Z"
     },
     {
       "card_id": "eu_273758",
@@ -637,7 +637,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:05.710Z"
+      "last_updated": "2026-04-18T09:58:24.702Z"
     },
     {
       "card_id": "eu_277450_holo",
@@ -665,7 +665,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:32.715Z"
+      "last_updated": "2026-04-18T09:58:51.614Z"
     },
     {
       "card_id": "eu_279688_holo",
@@ -692,7 +692,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:33.444Z"
+      "last_updated": "2026-04-18T09:58:52.347Z"
     },
     {
       "card_id": "eu_274896_holo",
@@ -719,7 +719,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:29.095Z"
+      "last_updated": "2026-04-18T09:58:48.042Z"
     },
     {
       "card_id": "eu_275113_holo",
@@ -745,7 +745,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:54.247Z"
+      "last_updated": "2026-04-18T09:59:13.131Z"
     }
   ],
   "flip_opportunities": [
@@ -774,7 +774,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:39.457Z"
+      "last_updated": "2026-04-18T09:57:58.560Z"
     },
     {
       "card_id": "eu_276281",
@@ -801,7 +801,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:57.128Z"
+      "last_updated": "2026-04-18T09:58:16.195Z"
     },
     {
       "card_id": "eu_276281",
@@ -828,7 +828,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:08.704Z"
+      "last_updated": "2026-04-18T09:58:27.736Z"
     },
     {
       "card_id": "eu_277305",
@@ -855,7 +855,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:30:01.702Z"
+      "last_updated": "2026-04-18T09:59:20.609Z"
     },
     {
       "card_id": "eu_276510",
@@ -881,7 +881,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:30:00.878Z"
+      "last_updated": "2026-04-18T09:59:19.789Z"
     },
     {
       "card_id": "eu_276748",
@@ -908,7 +908,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:35.928Z"
+      "last_updated": "2026-04-18T09:57:54.859Z"
     },
     {
       "card_id": "eu_574273",
@@ -935,7 +935,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:46.464Z"
+      "last_updated": "2026-04-18T09:58:05.563Z"
     },
     {
       "card_id": "eu_276871",
@@ -962,7 +962,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:37.408Z"
+      "last_updated": "2026-04-18T09:57:56.279Z"
     }
   ],
   "top_overall": [
@@ -992,7 +992,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:49.271Z"
+      "last_updated": "2026-04-18T09:58:08.247Z"
     },
     {
       "card_id": "eu_273753",
@@ -1020,7 +1020,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:01.453Z"
+      "last_updated": "2026-04-18T09:58:20.533Z"
     },
     {
       "card_id": "eu_785521",
@@ -1047,7 +1047,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:12.126Z"
+      "last_updated": "2026-04-18T09:58:31.186Z"
     },
     {
       "card_id": "eu_289809",
@@ -1075,7 +1075,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:42.831Z"
+      "last_updated": "2026-04-18T09:58:01.821Z"
     },
     {
       "card_id": "eu_289809",
@@ -1103,7 +1103,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:44.375Z"
+      "last_updated": "2026-04-18T09:58:03.343Z"
     },
     {
       "card_id": "eu_289809",
@@ -1131,7 +1131,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:14.295Z"
+      "last_updated": "2026-04-18T09:58:33.324Z"
     },
     {
       "card_id": "eu_752897",
@@ -1158,7 +1158,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:13.568Z"
+      "last_updated": "2026-04-18T09:58:32.639Z"
     },
     {
       "card_id": "eu_667956",
@@ -1185,7 +1185,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:03.376Z"
+      "last_updated": "2026-04-18T09:58:22.592Z"
     },
     {
       "card_id": "eu_705353",
@@ -1212,7 +1212,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:57.853Z"
+      "last_updated": "2026-04-18T09:58:16.947Z"
     },
     {
       "card_id": "eu_273741",
@@ -1238,7 +1238,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:04.911Z"
+      "last_updated": "2026-04-18T09:58:24.015Z"
     },
     {
       "card_id": "eu_273733",
@@ -1264,7 +1264,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:07.907Z"
+      "last_updated": "2026-04-18T09:58:26.928Z"
     },
     {
       "card_id": "eu_701046",
@@ -1290,7 +1290,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:09.388Z"
+      "last_updated": "2026-04-18T09:58:28.433Z"
     },
     {
       "card_id": "eu_680219",
@@ -1316,7 +1316,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:04.084Z"
+      "last_updated": "2026-04-18T09:58:23.312Z"
     },
     {
       "card_id": "eu_565775",
@@ -1342,7 +1342,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:47.878Z"
+      "last_updated": "2026-04-18T09:58:06.903Z"
     },
     {
       "card_id": "eu_565775",
@@ -1368,7 +1368,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:02.053Z"
+      "last_updated": "2026-04-18T09:58:21.131Z"
     }
   ],
   "all_tracked": [
@@ -1398,7 +1398,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:49.271Z"
+      "last_updated": "2026-04-18T09:58:08.247Z"
     },
     {
       "card_id": "eu_273753",
@@ -1426,7 +1426,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:01.453Z"
+      "last_updated": "2026-04-18T09:58:20.533Z"
     },
     {
       "card_id": "eu_785521",
@@ -1453,7 +1453,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:12.126Z"
+      "last_updated": "2026-04-18T09:58:31.186Z"
     },
     {
       "card_id": "eu_289809",
@@ -1481,7 +1481,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:42.831Z"
+      "last_updated": "2026-04-18T09:58:01.821Z"
     },
     {
       "card_id": "eu_289809",
@@ -1509,7 +1509,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:44.375Z"
+      "last_updated": "2026-04-18T09:58:03.343Z"
     },
     {
       "card_id": "eu_289809",
@@ -1537,7 +1537,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:14.295Z"
+      "last_updated": "2026-04-18T09:58:33.324Z"
     },
     {
       "card_id": "eu_752897",
@@ -1564,7 +1564,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:13.568Z"
+      "last_updated": "2026-04-18T09:58:32.639Z"
     },
     {
       "card_id": "eu_667956",
@@ -1591,7 +1591,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:03.376Z"
+      "last_updated": "2026-04-18T09:58:22.592Z"
     },
     {
       "card_id": "eu_705353",
@@ -1618,7 +1618,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:57.853Z"
+      "last_updated": "2026-04-18T09:58:16.947Z"
     },
     {
       "card_id": "eu_273741",
@@ -1644,7 +1644,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:04.911Z"
+      "last_updated": "2026-04-18T09:58:24.015Z"
     },
     {
       "card_id": "eu_273733",
@@ -1670,7 +1670,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:07.907Z"
+      "last_updated": "2026-04-18T09:58:26.928Z"
     },
     {
       "card_id": "eu_701046",
@@ -1696,7 +1696,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:09.388Z"
+      "last_updated": "2026-04-18T09:58:28.433Z"
     },
     {
       "card_id": "eu_680219",
@@ -1722,7 +1722,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:04.084Z"
+      "last_updated": "2026-04-18T09:58:23.312Z"
     },
     {
       "card_id": "eu_565775",
@@ -1748,7 +1748,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:47.878Z"
+      "last_updated": "2026-04-18T09:58:06.903Z"
     },
     {
       "card_id": "eu_565775",
@@ -1774,7 +1774,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:02.053Z"
+      "last_updated": "2026-04-18T09:58:21.131Z"
     },
     {
       "card_id": "eu_277305",
@@ -1801,7 +1801,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:30:01.702Z"
+      "last_updated": "2026-04-18T09:59:20.609Z"
     },
     {
       "card_id": "eu_740407",
@@ -1827,7 +1827,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:59.317Z"
+      "last_updated": "2026-04-18T09:58:18.404Z"
     },
     {
       "card_id": "eu_608720",
@@ -1855,7 +1855,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:02.775Z"
+      "last_updated": "2026-04-18T09:58:21.873Z"
     },
     {
       "card_id": "eu_773788",
@@ -1881,7 +1881,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:10.809Z"
+      "last_updated": "2026-04-18T09:58:29.873Z"
     },
     {
       "card_id": "eu_773788",
@@ -1907,7 +1907,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:15.703Z"
+      "last_updated": "2026-04-18T09:58:34.619Z"
     },
     {
       "card_id": "eu_786024",
@@ -1934,7 +1934,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:11.523Z"
+      "last_updated": "2026-04-18T09:58:30.607Z"
     },
     {
       "card_id": "eu_667956",
@@ -1960,7 +1960,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:19.901Z"
+      "last_updated": "2026-04-18T09:58:38.922Z"
     },
     {
       "card_id": "eu_276748",
@@ -1987,7 +1987,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:35.928Z"
+      "last_updated": "2026-04-18T09:57:54.859Z"
     },
     {
       "card_id": "eu_282754",
@@ -2013,7 +2013,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:55.092Z"
+      "last_updated": "2026-04-18T09:58:13.993Z"
     },
     {
       "card_id": "eu_276873",
@@ -2040,7 +2040,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:36.667Z"
+      "last_updated": "2026-04-18T09:57:55.574Z"
     },
     {
       "card_id": "eu_276872",
@@ -2067,7 +2067,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:38.133Z"
+      "last_updated": "2026-04-18T09:57:56.997Z"
     },
     {
       "card_id": "eu_276281",
@@ -2094,7 +2094,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:39.457Z"
+      "last_updated": "2026-04-18T09:57:58.560Z"
     },
     {
       "card_id": "eu_276965",
@@ -2121,7 +2121,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:41.683Z"
+      "last_updated": "2026-04-18T09:58:01.017Z"
     },
     {
       "card_id": "eu_275875",
@@ -2148,7 +2148,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:45.010Z"
+      "last_updated": "2026-04-18T09:58:04.080Z"
     },
     {
       "card_id": "eu_766991",
@@ -2174,7 +2174,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:45.742Z"
+      "last_updated": "2026-04-18T09:58:04.818Z"
     },
     {
       "card_id": "eu_861466",
@@ -2201,7 +2201,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:50.720Z"
+      "last_updated": "2026-04-18T09:58:09.690Z"
     },
     {
       "card_id": "eu_276281",
@@ -2228,7 +2228,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:57.128Z"
+      "last_updated": "2026-04-18T09:58:16.195Z"
     },
     {
       "card_id": "eu_273636",
@@ -2255,7 +2255,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:00.747Z"
+      "last_updated": "2026-04-18T09:58:19.815Z"
     },
     {
       "card_id": "eu_273713",
@@ -2282,7 +2282,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:06.401Z"
+      "last_updated": "2026-04-18T09:58:25.390Z"
     },
     {
       "card_id": "eu_276281",
@@ -2309,7 +2309,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:08.704Z"
+      "last_updated": "2026-04-18T09:58:27.736Z"
     },
     {
       "card_id": "eu_275749",
@@ -2336,7 +2336,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:15.019Z"
+      "last_updated": "2026-04-18T09:58:34.020Z"
     },
     {
       "card_id": "eu_689766",
@@ -2362,7 +2362,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:17.153Z"
+      "last_updated": "2026-04-18T09:58:36.060Z"
     },
     {
       "card_id": "eu_689767",
@@ -2388,7 +2388,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:17.874Z"
+      "last_updated": "2026-04-18T09:58:36.774Z"
     },
     {
       "card_id": "eu_368957_holo",
@@ -2414,7 +2414,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:25.246Z"
+      "last_updated": "2026-04-18T09:58:44.179Z"
     },
     {
       "card_id": "eu_274057",
@@ -2441,7 +2441,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:30:03.896Z"
+      "last_updated": "2026-04-18T09:59:22.813Z"
     },
     {
       "card_id": "eu_805538",
@@ -2469,7 +2469,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:35.193Z"
+      "last_updated": "2026-04-18T09:57:54.125Z"
     },
     {
       "card_id": "eu_289846",
@@ -2496,7 +2496,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:38.728Z"
+      "last_updated": "2026-04-18T09:57:57.731Z"
     },
     {
       "card_id": "eu_543691_holo",
@@ -2522,7 +2522,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:59.393Z"
+      "last_updated": "2026-04-18T09:59:18.260Z"
     },
     {
       "card_id": "eu_846820",
@@ -2548,7 +2548,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:51.444Z"
+      "last_updated": "2026-04-18T09:58:10.439Z"
     },
     {
       "card_id": "eu_846820",
@@ -2574,7 +2574,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:54.430Z"
+      "last_updated": "2026-04-18T09:58:13.369Z"
     },
     {
       "card_id": "eu_275506",
@@ -2601,7 +2601,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:43.544Z"
+      "last_updated": "2026-04-18T09:58:02.509Z"
     },
     {
       "card_id": "eu_288530",
@@ -2628,7 +2628,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:34.443Z"
+      "last_updated": "2026-04-18T09:57:53.405Z"
     },
     {
       "card_id": "eu_482974",
@@ -2655,7 +2655,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:20.631Z"
+      "last_updated": "2026-04-18T09:58:39.610Z"
     },
     {
       "card_id": "eu_274905_holo",
@@ -2682,7 +2682,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:26.040Z"
+      "last_updated": "2026-04-18T09:58:45.001Z"
     },
     {
       "card_id": "eu_273636",
@@ -2709,7 +2709,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:16.414Z"
+      "last_updated": "2026-04-18T09:58:35.338Z"
     },
     {
       "card_id": "eu_740409",
@@ -2735,7 +2735,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:58.584Z"
+      "last_updated": "2026-04-18T09:58:17.667Z"
     },
     {
       "card_id": "eu_740409",
@@ -2761,7 +2761,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:00.033Z"
+      "last_updated": "2026-04-18T09:58:19.102Z"
     },
     {
       "card_id": "eu_565753",
@@ -2787,7 +2787,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:48.538Z"
+      "last_updated": "2026-04-18T09:58:07.535Z"
     },
     {
       "card_id": "eu_275912_holo",
@@ -2813,7 +2813,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:28.293Z"
+      "last_updated": "2026-04-18T09:58:47.249Z"
     },
     {
       "card_id": "eu_274896_holo",
@@ -2840,7 +2840,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:29.095Z"
+      "last_updated": "2026-04-18T09:58:48.042Z"
     },
     {
       "card_id": "eu_560808",
@@ -2866,7 +2866,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:21.365Z"
+      "last_updated": "2026-04-18T09:58:40.234Z"
     },
     {
       "card_id": "eu_276280",
@@ -2893,7 +2893,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:40.171Z"
+      "last_updated": "2026-04-18T09:57:59.360Z"
     },
     {
       "card_id": "eu_276871",
@@ -2920,7 +2920,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:37.408Z"
+      "last_updated": "2026-04-18T09:57:56.279Z"
     },
     {
       "card_id": "eu_851253",
@@ -2947,7 +2947,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:49.996Z"
+      "last_updated": "2026-04-18T09:58:08.974Z"
     },
     {
       "card_id": "eu_273739",
@@ -2975,7 +2975,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:07.208Z"
+      "last_updated": "2026-04-18T09:58:26.239Z"
     },
     {
       "card_id": "eu_273758",
@@ -3003,7 +3003,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:05.710Z"
+      "last_updated": "2026-04-18T09:58:24.702Z"
     },
     {
       "card_id": "eu_840152",
@@ -3030,7 +3030,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:53.694Z"
+      "last_updated": "2026-04-18T09:58:12.630Z"
     },
     {
       "card_id": "eu_274893_holo",
@@ -3057,7 +3057,7 @@
         "momentum_up",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:57.163Z"
+      "last_updated": "2026-04-18T09:59:16.063Z"
     },
     {
       "card_id": "eu_546641",
@@ -3084,7 +3084,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:22.096Z"
+      "last_updated": "2026-04-18T09:58:40.970Z"
     },
     {
       "card_id": "eu_273599_holo",
@@ -3111,7 +3111,7 @@
         "momentum_up",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:35.584Z"
+      "last_updated": "2026-04-18T09:58:54.499Z"
     },
     {
       "card_id": "eu_557434_holo",
@@ -3137,7 +3137,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:38.500Z"
+      "last_updated": "2026-04-18T09:58:57.351Z"
     },
     {
       "card_id": "eu_574273",
@@ -3164,7 +3164,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:46.464Z"
+      "last_updated": "2026-04-18T09:58:05.563Z"
     },
     {
       "card_id": "eu_274769_holo",
@@ -3191,7 +3191,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:30:04.636Z"
+      "last_updated": "2026-04-18T09:59:23.549Z"
     },
     {
       "card_id": "eu_761512",
@@ -3218,7 +3218,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:10.105Z"
+      "last_updated": "2026-04-18T09:58:29.154Z"
     },
     {
       "card_id": "eu_276288",
@@ -3245,7 +3245,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:40.972Z"
+      "last_updated": "2026-04-18T09:58:00.173Z"
     },
     {
       "card_id": "eu_278992_holo",
@@ -3271,7 +3271,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:56.466Z"
+      "last_updated": "2026-04-18T09:59:15.364Z"
     },
     {
       "card_id": "eu_752789",
@@ -3298,7 +3298,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:12.849Z"
+      "last_updated": "2026-04-18T09:58:31.917Z"
     },
     {
       "card_id": "eu_574276",
@@ -3325,7 +3325,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:47.172Z"
+      "last_updated": "2026-04-18T09:58:06.287Z"
     },
     {
       "card_id": "eu_855666",
@@ -3351,7 +3351,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:52.226Z"
+      "last_updated": "2026-04-18T09:58:11.210Z"
     },
     {
       "card_id": "eu_282754",
@@ -3375,7 +3375,7 @@
       "psa_ratio": 0,
       "score": 0.55,
       "triggers": [],
-      "last_updated": "2026-04-18T09:28:52.940Z"
+      "last_updated": "2026-04-18T09:58:11.906Z"
     },
     {
       "card_id": "eu_877535",
@@ -3401,7 +3401,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:28:55.701Z"
+      "last_updated": "2026-04-18T09:58:14.729Z"
     },
     {
       "card_id": "eu_586566_holo",
@@ -3425,7 +3425,7 @@
       "psa_ratio": 0,
       "score": 0.55,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:29.919Z"
+      "last_updated": "2026-04-18T09:58:48.868Z"
     },
     {
       "card_id": "eu_279644_holo",
@@ -3451,7 +3451,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:31.270Z"
+      "last_updated": "2026-04-18T09:58:50.184Z"
     },
     {
       "card_id": "eu_363526_holo",
@@ -3477,7 +3477,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:34.158Z"
+      "last_updated": "2026-04-18T09:58:53.052Z"
     },
     {
       "card_id": "eu_274798_holo",
@@ -3503,7 +3503,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:36.281Z"
+      "last_updated": "2026-04-18T09:58:55.208Z"
     },
     {
       "card_id": "eu_871616_holo",
@@ -3529,7 +3529,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:36.984Z"
+      "last_updated": "2026-04-18T09:58:55.920Z"
     },
     {
       "card_id": "eu_275182_holo",
@@ -3555,7 +3555,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:37.684Z"
+      "last_updated": "2026-04-18T09:58:56.636Z"
     },
     {
       "card_id": "eu_278996_holo",
@@ -3581,7 +3581,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:48.365Z"
+      "last_updated": "2026-04-18T09:59:07.249Z"
     },
     {
       "card_id": "eu_273606_holo",
@@ -3607,7 +3607,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:51.284Z"
+      "last_updated": "2026-04-18T09:59:10.167Z"
     },
     {
       "card_id": "eu_275105_holo",
@@ -3633,7 +3633,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:52.704Z"
+      "last_updated": "2026-04-18T09:59:11.577Z"
     },
     {
       "card_id": "eu_586566_holo",
@@ -3657,7 +3657,7 @@
       "psa_ratio": 0,
       "score": 0.55,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:53.515Z"
+      "last_updated": "2026-04-18T09:59:12.386Z"
     },
     {
       "card_id": "eu_427176",
@@ -3681,7 +3681,7 @@
       "psa_ratio": 0,
       "score": 0.547,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:18.477Z"
+      "last_updated": "2026-04-18T09:58:37.496Z"
     },
     {
       "card_id": "eu_276510",
@@ -3707,7 +3707,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:30:00.878Z"
+      "last_updated": "2026-04-18T09:59:19.789Z"
     },
     {
       "card_id": "eu_427171",
@@ -3731,7 +3731,7 @@
       "psa_ratio": 0,
       "score": 0.545,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:19.185Z"
+      "last_updated": "2026-04-18T09:58:38.212Z"
     },
     {
       "card_id": "eu_276758",
@@ -3757,7 +3757,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:28:33.689Z"
+      "last_updated": "2026-04-18T09:57:52.690Z"
     },
     {
       "card_id": "eu_277450_holo",
@@ -3785,7 +3785,7 @@
         "grade_target",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:32.715Z"
+      "last_updated": "2026-04-18T09:58:51.614Z"
     },
     {
       "card_id": "eu_276675_holo",
@@ -3811,7 +3811,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:55.768Z"
+      "last_updated": "2026-04-18T09:59:14.660Z"
     },
     {
       "card_id": "eu_275114_holo",
@@ -3837,7 +3837,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:40.652Z"
+      "last_updated": "2026-04-18T09:58:59.450Z"
     },
     {
       "card_id": "eu_274923_holo",
@@ -3863,7 +3863,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:44.859Z"
+      "last_updated": "2026-04-18T09:59:03.736Z"
     },
     {
       "card_id": "eu_275369_holo",
@@ -3889,7 +3889,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:39.926Z"
+      "last_updated": "2026-04-18T09:58:58.773Z"
     },
     {
       "card_id": "eu_273632_holo",
@@ -3915,7 +3915,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:34.872Z"
+      "last_updated": "2026-04-18T09:58:53.769Z"
     },
     {
       "card_id": "eu_275113_holo",
@@ -3941,7 +3941,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:54.247Z"
+      "last_updated": "2026-04-18T09:59:13.131Z"
     },
     {
       "card_id": "eu_275291_holo",
@@ -3968,7 +3968,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:39.228Z"
+      "last_updated": "2026-04-18T09:58:58.076Z"
     },
     {
       "card_id": "eu_273562_holo",
@@ -3994,7 +3994,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:52.013Z"
+      "last_updated": "2026-04-18T09:59:10.869Z"
     },
     {
       "card_id": "eu_274903_holo",
@@ -4018,7 +4018,7 @@
       "psa_ratio": 0,
       "score": 0.427,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:57.858Z"
+      "last_updated": "2026-04-18T09:59:16.742Z"
     },
     {
       "card_id": "eu_275082_holo",
@@ -4044,7 +4044,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:30:00.083Z"
+      "last_updated": "2026-04-18T09:59:18.963Z"
     },
     {
       "card_id": "eu_279688_holo",
@@ -4071,7 +4071,7 @@
         "momentum_down",
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:33.444Z"
+      "last_updated": "2026-04-18T09:58:52.347Z"
     },
     {
       "card_id": "eu_275279_holo",
@@ -4095,7 +4095,7 @@
       "psa_ratio": 0,
       "score": 0.367,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:49.883Z"
+      "last_updated": "2026-04-18T09:59:08.763Z"
     },
     {
       "card_id": "eu_277499",
@@ -4121,7 +4121,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:30:02.451Z"
+      "last_updated": "2026-04-18T09:59:21.359Z"
     },
     {
       "card_id": "eu_277498",
@@ -4147,7 +4147,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:30:03.146Z"
+      "last_updated": "2026-04-18T09:59:22.062Z"
     },
     {
       "card_id": "eu_274900_holo",
@@ -4171,31 +4171,7 @@
       "psa_ratio": 0,
       "score": 0.35,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:30.556Z"
-    },
-    {
-      "card_id": "eu_286305_holo",
-      "name": "Haunter Holo",
-      "number": "5/62",
-      "set": "fossil",
-      "set_name": "Fossil",
-      "friendly_name": "Haunter Holo",
-      "rarity": "Uncommon",
-      "tier": "tier4_vintage",
-      "image": "https://cdn.poketrace.com/cards/7abf37a9812fb8ea.webp",
-      "approx_gbp": 50,
-      "market_price": 0,
-      "avg_price_7d": 7,
-      "avg_price_30d": 7,
-      "lowest_listing": 0,
-      "sales_count_7d": 65,
-      "psa10_price": null,
-      "raw_price": 7,
-      "momentum_pct": 0,
-      "psa_ratio": 0,
-      "score": 0.35,
-      "triggers": [],
-      "last_updated": "2026-04-18T09:29:45.565Z"
+      "last_updated": "2026-04-18T09:58:49.503Z"
     },
     {
       "card_id": "eu_279305_holo",
@@ -4221,7 +4197,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:46.262Z"
+      "last_updated": "2026-04-18T09:59:05.159Z"
     },
     {
       "card_id": "eu_275088_holo",
@@ -4247,7 +4223,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:46.964Z"
+      "last_updated": "2026-04-18T09:59:05.858Z"
     },
     {
       "card_id": "eu_274792_holo",
@@ -4273,7 +4249,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:47.670Z"
+      "last_updated": "2026-04-18T09:59:06.544Z"
     },
     {
       "card_id": "eu_274781_holo",
@@ -4297,7 +4273,7 @@
       "psa_ratio": 0,
       "score": 0.317,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:50.579Z"
+      "last_updated": "2026-04-18T09:59:09.464Z"
     },
     {
       "card_id": "eu_275083_holo",
@@ -4323,7 +4299,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:54.943Z"
+      "last_updated": "2026-04-18T09:59:13.844Z"
     },
     {
       "card_id": "eu_274906_holo",
@@ -4350,7 +4326,7 @@
         "momentum_down",
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:41.360Z"
+      "last_updated": "2026-04-18T09:59:00.149Z"
     },
     {
       "card_id": "eu_275912_holo",
@@ -4374,7 +4350,31 @@
       "psa_ratio": 0.9,
       "score": 0.275,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:49.174Z"
+      "last_updated": "2026-04-18T09:59:08.061Z"
+    },
+    {
+      "card_id": "019bff7c-4505-7332-a33a-5ee1b07b054c",
+      "name": "Haunter Holo",
+      "number": "5/62",
+      "set": "fossil",
+      "set_name": "Fossil",
+      "friendly_name": "Haunter Holo",
+      "rarity": "Uncommon",
+      "tier": "tier4_vintage",
+      "image": "https://cdn.poketrace.com/cards/890c861b8af4b9c2.webp",
+      "approx_gbp": 50,
+      "market_price": 7,
+      "avg_price_7d": 7,
+      "avg_price_30d": 7,
+      "lowest_listing": 7,
+      "sales_count_7d": 10,
+      "psa10_price": null,
+      "raw_price": 7,
+      "momentum_pct": 0,
+      "psa_ratio": 0,
+      "score": 0.233,
+      "triggers": [],
+      "last_updated": "2026-04-18T09:59:04.452Z"
     },
     {
       "card_id": "eu_274999_holo",
@@ -4400,7 +4400,7 @@
       "triggers": [
         "momentum_up"
       ],
-      "last_updated": "2026-04-18T09:29:26.744Z"
+      "last_updated": "2026-04-18T09:58:45.729Z"
     },
     {
       "card_id": "eu_275407_holo",
@@ -4426,7 +4426,7 @@
       "triggers": [
         "momentum_up"
       ],
-      "last_updated": "2026-04-18T09:29:58.698Z"
+      "last_updated": "2026-04-18T09:59:17.555Z"
     },
     {
       "card_id": "eu_275309_holo",
@@ -4452,7 +4452,7 @@
       "triggers": [
         "grade_target"
       ],
-      "last_updated": "2026-04-18T09:29:43.430Z"
+      "last_updated": "2026-04-18T09:59:02.294Z"
     },
     {
       "card_id": "eu_275259_holo",
@@ -4476,7 +4476,7 @@
       "psa_ratio": 0,
       "score": 0.144,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:42.756Z"
+      "last_updated": "2026-04-18T09:59:01.587Z"
     },
     {
       "card_id": "eu_274777_holo",
@@ -4500,7 +4500,7 @@
       "psa_ratio": 0,
       "score": 0.027,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:27.480Z"
+      "last_updated": "2026-04-18T09:58:46.426Z"
     },
     {
       "card_id": "eu_274915_holo",
@@ -4526,7 +4526,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:22.801Z"
+      "last_updated": "2026-04-18T09:58:41.761Z"
     },
     {
       "card_id": "eu_274915_holo",
@@ -4552,7 +4552,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:23.625Z"
+      "last_updated": "2026-04-18T09:58:42.586Z"
     },
     {
       "card_id": "eu_274915_holo",
@@ -4578,7 +4578,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:24.424Z"
+      "last_updated": "2026-04-18T09:58:43.378Z"
     },
     {
       "card_id": "eu_275292_holo",
@@ -4602,7 +4602,7 @@
       "psa_ratio": 0,
       "score": 0,
       "triggers": [],
-      "last_updated": "2026-04-18T09:29:42.054Z"
+      "last_updated": "2026-04-18T09:59:00.873Z"
     },
     {
       "card_id": "eu_274884_holo",
@@ -4628,7 +4628,7 @@
       "triggers": [
         "flip_opportunity"
       ],
-      "last_updated": "2026-04-18T09:29:44.141Z"
+      "last_updated": "2026-04-18T09:59:02.994Z"
     }
   ]
 }
