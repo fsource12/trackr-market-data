@@ -133,6 +133,39 @@ async function fetchCard(name, setCode, number) {
 // US: prices.ebay.NEAR_MINT.{avg, avg7d, avg30d, saleCount}
 //     prices.ebay.PSA_10.{avg}
 //     prices.tcgplayer.NEAR_MINT.{avg, avg7d, avg30d}
+
+// ── Fetch price history for a card ID ────────────────────────
+// Tries NEAR_MINT first (raw), falls back to AGGREGATED
+// Returns array of { date, avg } sorted oldest→newest, or null
+async function fetchHistory(cardId, market) {
+  if (!cardId) return null;
+  const hdrs = { "X-API-Key": PT_KEY };
+
+  // For EU cards use NEAR_MINT (CardMarket condition tier)
+  // For US cards use NEAR_MINT (eBay condition tier)
+  const tier = "NEAR_MINT";
+
+  try {
+    const url = `${PT_BASE}/cards/${cardId}/prices/${tier}/history`;
+    const json = await httpGet(url, hdrs);
+    const data = json?.data;
+    if (!Array.isArray(data) || !data.length) return null;
+
+    // Normalise to { date: "YYYY-MM-DD", avg: number }
+    const pts = data
+      .filter(d => d.date && (d.avg || d.avg1d || d.avg7d))
+      .map(d => ({
+        date: d.date.substring(0, 10),
+        avg:  Math.round(d.avg || d.avg7d || d.avg1d),
+      }))
+      .sort((a,b) => a.date.localeCompare(b.date));
+
+    return pts.length >= 2 ? pts : null;
+  } catch(e) {
+    return null; // history not available — not fatal
+  }
+}
+
 function extractPrices(euCard, usCard, gbpRate) {
   const eurToGbp = v => v ? +(v * 0.855).toFixed(2) : null;
   const usdToGbp = v => v ? +(v * gbpRate).toFixed(2) : null;
@@ -207,6 +240,20 @@ async function main() {
   const gbpRate = await fetchGBPRate();
   console.log(`USD→GBP: ${gbpRate}\n`);
 
+  // ── Load existing price history ──────────────────────────────
+  // { "Name|number|set": { lastFetched: "YYYY-MM-DD", pts: [{date,avg},...] } }
+  let priceHistory = {};
+  try {
+    if (fs.existsSync("price-history.json")) {
+      priceHistory = JSON.parse(fs.readFileSync("price-history.json", "utf8"));
+      console.log(`Loaded price-history.json (${Object.keys(priceHistory).length} cards)\n`);
+    }
+  } catch(e) { console.warn("Could not read price-history.json:", e.message); }
+
+  const today = new Date().toISOString().substring(0, 10);
+  const HISTORY_TTL_DAYS = 7; // re-fetch full history weekly
+  let histFetched = 0, histSkipped = 0, histFailed = 0;
+
   const scanList = JSON.parse(fs.readFileSync("scan-list.json","utf8"));
   const allCards = [];
   for (const [tier, sets] of Object.entries(scanList)) {
@@ -244,6 +291,45 @@ async function main() {
       const triggers = classifyTriggers(prices, scores);
       const apiCard  = euCard || usCard;
 
+      // ── Price history: fetch from API or use cached ──────────
+      const _histKey = `${card.name}|${card.number}|${card.set}`;
+      const _existing = priceHistory[_histKey];
+      const _daysSinceFetch = _existing?.lastFetched
+        ? Math.floor((Date.now() - new Date(_existing.lastFetched).getTime()) / 86400000)
+        : 999;
+      const _needsHistFetch = !_existing || _daysSinceFetch >= HISTORY_TTL_DAYS;
+
+      let _histPts = _existing?.pts || [];
+
+      if (_needsHistFetch && apiCard?.id) {
+        await sleep(150); // small extra delay for history call
+        const _fetched = await fetchHistory(apiCard.id, apiCard.market || "EU");
+        if (_fetched) {
+          _histPts = _fetched;
+          priceHistory[_histKey] = { lastFetched: today, pts: _histPts };
+          histFetched++;
+        } else {
+          histFailed++;
+        }
+      } else {
+        histSkipped++;
+      }
+
+      // Always append today's price as the latest point
+      if (prices.marketPrice || prices.rawPrice) {
+        const _todayPrice = Math.round(prices.marketPrice || prices.rawPrice);
+        const _lastPt = _histPts[_histPts.length - 1];
+        if (!_lastPt || _lastPt.date !== today) {
+          _histPts = [..._histPts, { date: today, avg: _todayPrice }];
+        } else {
+          // Update today's point with latest price
+          _histPts = [..._histPts.slice(0, -1), { date: today, avg: _todayPrice }];
+        }
+        // Keep last 365 days
+        _histPts = _histPts.sort((a,b) => a.date.localeCompare(b.date)).slice(-365);
+        priceHistory[_histKey] = { lastFetched: _existing?.lastFetched || today, pts: _histPts };
+      }
+
       results.push({
         card_id:        apiCard?.id || null,
         name:           card.name,
@@ -267,6 +353,7 @@ async function main() {
         score:          scores.totalScore,
         triggers,
         last_updated:   new Date().toISOString(),
+        history:        priceHistory[`${card.name}|${card.number}|${card.set}`]?.pts || [],
       });
       ok++;
     } catch(e) {
@@ -307,12 +394,21 @@ async function main() {
   fs.writeFileSync("daily-movers.json", JSON.stringify(output, null, 2));
   console.log(`✓ daily-movers.json written (${results.length} cards)\n`);
 
+  // ── Save price history ───────────────────────────────────────
+  fs.writeFileSync("price-history.json", JSON.stringify(priceHistory));
+  const histCardCount = Object.keys(priceHistory).length;
+  const avgPts = histCardCount
+    ? Math.round(Object.values(priceHistory).reduce((a,v) => a + (v.pts?.length||0), 0) / histCardCount)
+    : 0;
+  console.log(`✓ price-history.json written (${histCardCount} cards, avg ${avgPts} pts/card)`);
+  console.log(`  History: ${histFetched} fetched | ${histSkipped} cached | ${histFailed} failed\n`);
+
   if (mom_up.length) {
     console.log("📈 Top Rising:");
     mom_up.slice(0,5).forEach(c =>
       console.log(`  ${c.name.padEnd(28)} ▲${c.momentum_pct}%  £${c.market_price||"—"}`));
   } else {
-    console.log("ℹ No momentum signals today (7d == 30d avg for most cards)");
+    console.log("ℹ No momentum signals today");
     console.log("  All tracked cards:");
     sorted.slice(0,30).forEach(c =>
       console.log(`  ${c.name.padEnd(28)} £${c.market_price||c.approx_gbp||"—"}`));
