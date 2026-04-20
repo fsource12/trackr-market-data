@@ -146,8 +146,11 @@ function scoreCard(prices) {
 
 function classifyTriggers(prices, scores) {
   const t = [];
-  if (scores.momentumPct >= 3)  t.push("momentum_up");
-  if (scores.momentumPct <= -3) t.push("momentum_down");
+  // Momentum only meaningful if both % AND abs £ move are significant
+  // A 5% move on a £2 card = 10p — not worth flagging for a reseller
+  const _absMove = prices.avg30d ? Math.abs(Math.round((prices.avg7d||0) - prices.avg30d)) : 0;
+  if (scores.momentumPct >= 5  && _absMove >= 5)  t.push("momentum_up");
+  if (scores.momentumPct <= -5 && _absMove >= 5)  t.push("momentum_down");
   if (scores.psaRatio >= 1.8)   t.push("grade_target");
   if (prices.lowestListing && prices.marketPrice && prices.lowestListing < prices.marketPrice*0.92)
     t.push("flip_opportunity");
@@ -233,8 +236,8 @@ async function main() {
 
       results.push({
         card_id:        apiCard?.id||null,
-        name:           card.name,
-        number:         card.number,
+        name:           apiCard?.name || card.name,
+        number:         apiCard?.cardNumber || card.number,
         set:            card.set,
         set_name:       SET_NAMES[card.set]||card.set,
         friendly_name:  card.name,
